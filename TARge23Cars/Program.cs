@@ -1,13 +1,27 @@
 namespace TARge23Cars;
 
+using Microsoft.EntityFrameworkCore;
+using TARge23Cars.Data;
+
 public class Program {
-  public static void Main(string[] args) {
+  public static void Main(string[] args) 
+  {
     var builder = WebApplication.CreateBuilder(args);
 
     // Add services to the container.
     builder.Services.AddControllersWithViews();
 
+    builder.Services.AddDbContext<CarsDbContext>(options => 
+    {
+      options.UseSqlServer(
+        builder.Configuration.GetConnectionString("Default"),
+        opt => opt.EnableRetryOnFailure()
+      );
+    });
+
     var app = builder.Build();
+
+    InitDatabase(app);
 
     // Configure the HTTP request pipeline.
     if (!app.Environment.IsDevelopment())
@@ -27,5 +41,23 @@ public class Program {
         pattern: "{controller=Home}/{action=Index}/{id?}");
 
     app.Run();
+  }
+
+  static void InitDatabase(WebApplication app) 
+  {
+    using IServiceScope scope = app.Services.CreateScope();
+    IServiceProvider services = scope.ServiceProvider;
+
+    try 
+    {
+      CarsDbContext ctx = services.GetRequiredService<CarsDbContext>();
+      ctx.Database.Migrate();
+      DbInitializer.InitializeDb(ctx);
+    }
+    catch (Exception ex)
+    {
+      var logger = services.GetRequiredService<ILogger>();
+      logger.LogError(ex, "Error while initializing the database.");
+    }
   }
 }
