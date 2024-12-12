@@ -22,7 +22,10 @@ public class CarsService : ICarService
   {
     Car c = new();
     dto.TransferTo(c);
+    
     c.Id = Guid.NewGuid();
+    c.CreationDate = DateTime.Now;
+    c.LastModified = DateTime.Now;
 
     await _ctx.Cars.AddAsync(c);
     await _ctx.SaveChangesAsync();
@@ -56,6 +59,8 @@ public class CarsService : ICarService
   {
     Car c = new();
     dto.TransferTo(c);
+
+    c.LastModified = DateTime.Now;
     
     _ctx.Cars.Update(c);
     await _ctx.SaveChangesAsync();
