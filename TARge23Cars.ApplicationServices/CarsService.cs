@@ -30,7 +30,7 @@ public class CarsService : ICarService
     return c;
   }
 
-  public async Task<IEnumerable<Car>> GetAllCars()
+  public async Task<List<Car>> GetAllCars()
   {
     return await _ctx.Cars.ToListAsync();
   }

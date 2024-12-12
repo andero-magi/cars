@@ -7,7 +7,7 @@ public interface ICarService
 {
   public Task<Car?> GetCarById(Guid id);
 
-  public Task<IEnumerable<Car>> GetAllCars();
+  public Task<List<Car>> GetAllCars();
 
   public Task<Car> CreateCar(CarDto dto);
 
