@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TARge23Cars.Core\TARge23Cars.Core.csproj" />
     <ProjectReference Include="..\TARge23Cars.Data\TARge23Cars.Data.csproj" />
+    <ProjectReference Include="..\TARge23Cars.ApplicationServices\TARge23Cars.ApplicationServices.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,41 @@
+﻿@model TARge23Cars.Models.Cars.IndexViewModel;
+
+@{
+  ViewData["Title"] = "Cars";
+}
+
+<h2>Cars</h2>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Model</th>
+      <th>Serial Number</th>
+      <th>Manufacturer</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @{
+      int num = 0;
+    }
+
+    @foreach(var car in Model.Cars) {
+      num++;
+
+      <tr>
+        <td>@num</td>
+        <td>@car.ModelName</td>
+        <td>@car.SerialNumber</td>
+        <td>@car.Manufacturer</td>
+        <td>
+          <a asp-action="Details" asp-route-carId="@car.Id" asp-controller="Cars">Details</a>
+          <a asp-action="Edit" asp-route-carId="@car.Id" asp-controller="Cars">Edit</a>
+          <a asp-action="Delete" asp-route-carId="@car.Id" asp-controller="Cars">Delete</a>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
