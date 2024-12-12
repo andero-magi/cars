@@ -27,7 +27,25 @@ public class CarsController : Controller
 
   public async Task<IActionResult> Create()
   {
-    return View();
+    ViewData["IsCreate"] = "true";
+
+    CarCreateUpdateViewModel vm = new() 
+    {
+      Dto = new()
+    };
+
+    return View("CreateUpdate", vm);
+  }
+
+  [HttpPost]
+  public async Task<IActionResult> Create(CarCreateUpdateViewModel vm) {
+    if (vm == null || vm.Dto == null) {
+      return NotFound();
+    }
+
+    Car c = await _cars.CreateCar(vm.Dto);
+
+    return RedirectToAction(nameof(Index));
   }
 
   public async Task<IActionResult> Edit(Guid? carId)

@@ -1,0 +1,61 @@
+﻿@model TARge23Cars.Models.Cars.CarCreateUpdateViewModel;
+
+@{
+  bool creating = ((string) (ViewData["IsCreate"] ?? "true")) == "true";
+
+  if (creating) 
+  {
+    ViewData["Title"] = "Create new car";
+  } 
+  else 
+  {
+    ViewData["Title"] = "Update Car";
+  }
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="post" enctype="multipart/form-data">
+  <input asp-for="Dto.Id" type="hidden">
+  <input asp-for="Dto.CreationDate" type="hidden">
+  <input asp-for="Dto.LastModified" type="hidden">
+
+  <div class="row form-group">
+    <label asp-for="Dto.ModelName" class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-10">
+      <input asp-for="Dto.ModelName" class="form-control">
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <label asp-for="Dto.SerialNumber" class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-10">
+      <input asp-for="Dto.SerialNumber" class="form-control">
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <label asp-for="Dto.Manufacturer" class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-10">
+      <input asp-for="Dto.Manufacturer" class="form-control">
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <label asp-for="Dto.ManufacturerCountry" class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-10">
+      <input asp-for="Dto.ManufacturerCountry" class="form-control">
+    </div>
+  </div>
+
+  @if (creating) 
+  {
+    <input asp-action="Create" asp-controller="Cars" type="submit" class="btn btn-primary" value="Create"/>
+  }
+  else 
+  {
+    <input asp-action="Update" asp-controller="Cars" type="submit" class="btn btn-primary" value="Update"/>
+  }
+
+  <a asp-action="Index" asp-controller="Cars" class="btn btn-success">Back</a>
+</form>
