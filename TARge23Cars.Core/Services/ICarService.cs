@@ -5,7 +5,7 @@ using TARge23Cars.Core.Dto;
 
 public interface ICarService
 {
-  public Task<Car> GetCarById(Guid id);
+  public Task<Car?> GetCarById(Guid id);
 
   public Task<IEnumerable<Car>> GetAllCars();
 
