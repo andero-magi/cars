@@ -1,0 +1,39 @@
+﻿@model TARge23Cars.Core.Domain.Car;
+
+<dl class="row">
+  <div class="form-group row">
+    <label asp-for="Id" class="col-sm-2 col-form-label"></label>
+    @Html.DisplayFor(m => m.Id)
+  </div>
+
+  <div class="form-group row">
+    <label asp-for="ModelName" class="col-sm-2 col-form-label"></label>
+    @Html.DisplayFor(m => m.ModelName)
+  </div>
+
+  <div class="form-group row">
+    <label asp-for="SerialNumber" class="col-sm-2 col-form-label"></label>
+    @Html.DisplayFor(m => m.SerialNumber)
+  </div>
+
+  <div class="form-group row">
+    <label asp-for="Manufacturer" class="col-sm-2 col-form-label"></label>
+    @Html.DisplayFor(m => m.Manufacturer)
+  </div>
+
+  <div class="form-group row">
+    <label asp-for="ManufacturerCountry" class="col-sm-2 col-form-label"></label>
+    @Html.DisplayFor(m => m.ManufacturerCountry)
+  </div>
+
+  <div class="form-group row">
+    <label asp-for="CreationDate" class="col-sm-2 col-form-label"></label>
+    @Html.DisplayFor(m => m.CreationDate)
+  </div>
+
+  <div class="form-group row">
+    <label asp-for="LastModified" class="col-sm-2 col-form-label"></label>
+    @Html.DisplayFor(m => m.LastModified)
+  </div>
+
+</dl>

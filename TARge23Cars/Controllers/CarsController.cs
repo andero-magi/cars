@@ -81,7 +81,7 @@ public class CarsController : Controller
     }
 
     Car c = await _cars.UpdateCar(vm.Dto);
-    
+
     return RedirectToAction(nameof(Index));
   }
 
@@ -92,6 +92,22 @@ public class CarsController : Controller
 
   public async Task<IActionResult> Details(Guid? carId)
   {
-    return View();
+    if (carId == null) 
+    {
+      return NotFound();
+    }
+
+    var car = await _cars.GetCarById((Guid) carId);
+    if (car == null) 
+    {
+      return NotFound();
+    }
+
+    CarDetailsViewModel vm = new()
+    {
+      Car = car
+    };
+
+    return View(vm);
   }
 }
