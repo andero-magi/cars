@@ -1,6 +1,8 @@
 namespace TARge23Cars;
 
 using Microsoft.EntityFrameworkCore;
+using TARge23Cars.ApplicationServices;
+using TARge23Cars.Core.Services;
 using TARge23Cars.Data;
 
 public class Program {
@@ -10,6 +12,8 @@ public class Program {
 
     // Add services to the container.
     builder.Services.AddControllersWithViews();
+
+    builder.Services.AddScoped<ICarService, CarsService>();
 
     builder.Services.AddDbContext<CarsDbContext>(options => 
     {
