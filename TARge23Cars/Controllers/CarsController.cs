@@ -2,6 +2,7 @@ namespace TARge23Cars.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
 using TARge23Cars.Core.Domain;
+using TARge23Cars.Core.Dto;
 using TARge23Cars.Core.Services;
 using TARge23Cars.Models.Cars;
 
@@ -39,7 +40,8 @@ public class CarsController : Controller
 
   [HttpPost]
   public async Task<IActionResult> Create(CarCreateUpdateViewModel vm) {
-    if (vm == null || vm.Dto == null) {
+    if (vm == null || vm.Dto == null) 
+    {
       return NotFound();
     }
 
@@ -50,7 +52,37 @@ public class CarsController : Controller
 
   public async Task<IActionResult> Edit(Guid? carId)
   {
-    return View();
+    if (carId == null) 
+    {
+      return NotFound();
+    }
+
+    Car? car = await _cars.GetCarById((Guid) carId);
+    if (car == null) 
+    {
+      return NotFound();
+    }
+
+    CarCreateUpdateViewModel vm = new()
+    {
+      Dto = new(car)
+    };
+
+    ViewData["IsCreate"] = "false";
+    return View("CreateUpdate", vm);
+  }
+
+  [HttpPost]
+  public async Task<IActionResult> Edit(CarCreateUpdateViewModel vm)
+  {
+    if (vm == null || vm.Dto == null) 
+    {
+      return NotFound();
+    }
+
+    Car c = await _cars.UpdateCar(vm.Dto);
+    
+    return RedirectToAction(nameof(Index));
   }
 
   public async Task<IActionResult> Delete(Guid? carId)
