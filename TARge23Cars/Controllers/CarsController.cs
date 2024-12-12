@@ -87,7 +87,35 @@ public class CarsController : Controller
 
   public async Task<IActionResult> Delete(Guid? carId)
   {
-    return View();
+    if (carId == null) 
+    {
+      return NotFound();
+    }
+
+    var car = await _cars.GetCarById((Guid) carId);
+    if (car == null) 
+    {
+      return NotFound();
+    }
+
+    CarDeleteViewModel vm = new()
+    {
+      Car = car
+    };
+
+    return View(vm);
+  }
+
+  public async Task<IActionResult> DeleteConfirm(Guid? carId)
+  {
+    if (carId == null) 
+    {
+      return NotFound();
+    }
+
+    await _cars.RemoveCar((Guid) carId);
+
+    return RedirectToAction(nameof(Index));
   }
 
   public async Task<IActionResult> Details(Guid? carId)

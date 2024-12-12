@@ -1,0 +1,12 @@
+﻿@model TARge23Cars.Models.Cars.CarDeleteViewModel;
+
+@{
+  ViewData["Title"] = "Delete Car";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<partial name="_Fields" model="Model.Car"/>
+
+<a asp-action="DeleteConfirm" asp-route-carId="@Model.Car.Id" asp-controller="Cars" class="btn btn-danger">Delete</a>
+<a asp-action="Index" asp-controller="Cars" class="btn btn-success">Back</a>
