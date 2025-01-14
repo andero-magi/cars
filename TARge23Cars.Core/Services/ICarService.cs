@@ -13,5 +13,5 @@ public interface ICarService
 
   public Task<Car> UpdateCar(CarDto dto);
 
-  public Task RemoveCar(Guid id);
+  public Task<Car?> RemoveCar(Guid id);
 }

@@ -43,16 +43,18 @@ public class CarsService : ICarService
     return await _ctx.Cars.FindAsync(id);
   }
 
-  public async Task RemoveCar(Guid id)
+  public async Task<Car?> RemoveCar(Guid id)
   {
     var car = await GetCarById(id);
     if (car == null) 
     {
-      return;
+      return null;
     }
 
     _ctx.Cars.Remove(car);
     await _ctx.SaveChangesAsync();
+
+    return car;
   }
 
   public async Task<Car> UpdateCar(CarDto dto)
